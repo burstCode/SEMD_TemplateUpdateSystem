@@ -29,13 +29,13 @@ namespace TemplatesWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userService.AuthenticateAsync(model.Email, model.Password);
+                var user = await _userService.AuthenticateAsync(model.User_Email, model.User_Password);
                 if (user != null)
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.Email, user.Email)
+                        new Claim(ClaimTypes.Name, user.User_Name),
+                        new Claim(ClaimTypes.Email, user.User_Email)
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

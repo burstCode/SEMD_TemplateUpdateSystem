@@ -36,10 +36,10 @@ namespace TemplatesWebsite.Files
             // Вуаля!
             return new Template
             {
-                Id = id,
-                TemplateFilename = filename,
-                LastUpdated = lastUpdated,
-                Version = parts[3] + "." + parts[4]
+                Template_Id = id,
+                Template_Filename = filename,
+                Template_LastUpdated = lastUpdated,
+                Template_Version = parts[3] + "." + parts[4]
             };
         }
     }

@@ -1,12 +1,7 @@
 ﻿using TemplatesAPI.Data;
 using TemplatesWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TemplatesAPI.Controllers
 {
@@ -28,10 +23,10 @@ namespace TemplatesAPI.Controllers
         {
             return await _context.Templates.Select(t => new Template
             {
-                Id = t.Id,
-                TemplateFilename = t.TemplateFilename,
-                LastUpdated = t.LastUpdated,
-                Version = t.Version
+                Template_Id = t.Template_Id,
+                Template_Filename = t.Template_Filename,
+                Template_LastUpdated = t.Template_LastUpdated,
+                Template_Version = t.Template_Version
             }).ToListAsync();
         }
 
@@ -49,10 +44,10 @@ namespace TemplatesAPI.Controllers
 
             return new Template
             {
-                Id = template.Id,
-                TemplateFilename = template.TemplateFilename,
-                LastUpdated = template.LastUpdated,
-                Version = template.Version
+                Template_Id = template.Template_Id,
+                Template_Filename = template.Template_Filename,
+                Template_LastUpdated = template.Template_LastUpdated,
+                Template_Version = template.Template_Version
             };
         }
 
@@ -67,7 +62,7 @@ namespace TemplatesAPI.Controllers
                 return NotFound();
             }
 
-            return File(template.Content, "application/octet-stream", template.TemplateFilename);
+            return File(template.Template_Content, "application/octet-stream", template.Template_Filename);
         }
     }
 }

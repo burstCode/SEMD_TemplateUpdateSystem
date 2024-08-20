@@ -57,11 +57,11 @@ namespace TemplatesWebsite.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await file.CopyToAsync(memoryStream);
-                    newTemplate.Content = memoryStream.ToArray();
+                    newTemplate.Template_Content = memoryStream.ToArray();
                 }
 
-                // Пытаемся найти шаблон с таким же id, как у загруженного
-                var oldTemplate = await _context.Templates.FindAsync(newTemplate.Id);
+                // Пытаемся найти шаблон с таким же Template_Id, как у загруженного
+                var oldTemplate = await _context.Templates.FindAsync(newTemplate.Template_Id);
 
                 // Если такого шаблона еще нет, то добавляем в качестве нового
                 if (oldTemplate == null)
@@ -74,12 +74,12 @@ namespace TemplatesWebsite.Controllers
                 // Но если такой шаблон уже существует, то проверяем дату последнего обновления
                 else
                 {
-                    if (oldTemplate.LastUpdated < newTemplate.LastUpdated)
+                    if (oldTemplate.Template_LastUpdated < newTemplate.Template_LastUpdated)
                     {
-                        oldTemplate.TemplateFilename = file.FileName;
-                        oldTemplate.LastUpdated = newTemplate.LastUpdated;
-                        oldTemplate.Version = newTemplate.Version;
-                        oldTemplate.Content = newTemplate.Content;
+                        oldTemplate.Template_Filename = file.FileName;
+                        oldTemplate.Template_LastUpdated = newTemplate.Template_LastUpdated;
+                        oldTemplate.Template_Version = newTemplate.Template_Version;
+                        oldTemplate.Template_Content = newTemplate.Template_Content;
 
                         _context.Templates.Update(oldTemplate);
                         await _context.SaveChangesAsync();

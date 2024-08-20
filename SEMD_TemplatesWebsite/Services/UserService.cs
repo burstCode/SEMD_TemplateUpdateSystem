@@ -3,7 +3,7 @@ using TemplatesWebsite.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TemplatesWebsite.Services
 {
@@ -19,11 +19,11 @@ namespace TemplatesWebsite.Services
         public async Task<User> AuthenticateAsync(string email, string password)
         {
             var hashedPassword = HashPassword(password);
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == hashedPassword);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.User_Email == email && u.User_Password == hashedPassword);
             return user;
         }
 
-        // Переместить в отдельный класс
+        // Хэширование пароля
         public static string HashPassword(string password)
         {
             using (SHA512 sha512 = SHA512.Create())

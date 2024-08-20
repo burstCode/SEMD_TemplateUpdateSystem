@@ -33,10 +33,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.TemplateFilename</td>
-                <td>@item.LastUpdated.ToString("dd.MM.yyyy")</td>
-				<td>@item.Version</td>
+                <td>@item.Template_Id</td>
+                <td>@item.Template_Filename</td>
+                <td>@item.Template_LastUpdated.ToString("dd.MM.yyyy")</td>
+				<td>@item.Template_Version</td>
             </tr>
         }
     </tbody>

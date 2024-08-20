@@ -1,9 +1,10 @@
-using TemplatesWebsite;
-using TemplatesWebsite.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using TemplatesWebsite.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+
+using TemplatesWebsite.Services;
+using TemplatesWebsite.Models;
+using TemplatesWebsite.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    if (dbContext.Database.EnsureCreated())
+    {
+        // Если база данных только была создана, то добавляется стандартный аккаунт
+        dbContext.Users.Add(
+            new User {
+                User_Email = "sales@simplex48.com",
+                User_Name = "Симплекс", 
+                User_Password = "de576dc430fd5767a0ce8b9122c095220ca413da542d620f896f3c2757230257aadc75c8b28e3744077586c70ab2d035db1a77bfa55dbc8042b97382f3fbe64d"
+            });
+
+        dbContext.SaveChanges();
+    }
+}
 
 if (!app.Environment.IsDevelopment())
 {

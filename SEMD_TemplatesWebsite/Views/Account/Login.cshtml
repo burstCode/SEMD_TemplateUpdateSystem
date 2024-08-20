@@ -4,17 +4,17 @@
 <form asp-action="Login" method="post" class="form-horizontal">
     <h2>Вход в аккаунт</h2>
     <div class="form-group"> 
-        <label asp-for="Email" class="col-md-2 control-label">Адрес эл. почты</label>
+        <label asp-for="User_Email" class="col-md-2 control-label">Адрес эл. почты</label>
         <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="User_Email" class="form-control" />
+            <span asp-validation-for="User_Email" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label">Пароль</label>
+        <label asp-for="User_Password" class="col-md-2 control-label">Пароль</label>
         <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="User_Password" class="form-control" />
+            <span asp-validation-for="User_Password" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
