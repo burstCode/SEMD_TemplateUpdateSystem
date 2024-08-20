@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TemplatesWebsite.Models.Template>
+
+@{
+    ViewData["Title"] = "Управление шаблонами";
+}
+
+@* Форма для загрузки нового шаблона *@
+<h2>Добавить новый шаблон</h2>
+
+<form asp-action="LoadTemplate" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Загрузить новый шаблон</label>
+        <input type="file" name="file" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Добавить шаблон</button>
+</form>
+
+<hr />
+
+@* Таблица с данными из БД *@
+<h1>Список шаблонов</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Наименование шаблона</th>
+            <th>Дата последнего обновления</th>
+            <th>Версия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.TemplateFilename</td>
+                <td>@item.LastUpdated.ToString("dd.MM.yyyy")</td>
+				<td>@item.Version</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* 
+    Красивые уведомления об ошибочных и успешных действиях 
+    P.S. КАКИЕ УВЕДОМЛЕНИЯ TOASTR КЛАССНЫЕ ВАЙ ВАЙ ВАЙ!
+*@
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+
+    <script>
+        $(document).ready(function() {
+            var successMessage = '@TempData["SuccessMessage"]';
+            var errorMessage = '@TempData["ErrorMessage"]';
+            if (successMessage) {
+                toastr.success(successMessage);
+            }
+            if (errorMessage) {
+                toastr.error(errorMessage);
+            }
+        });
+    </script>
+}

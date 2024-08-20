@@ -1,0 +1,6 @@
+@EGISZtemplatesAPI_HostAddress = https://localhost:44367
+
+GET {{EGISZtemplatesAPI_HostAddress}}/api/templates/
+Accept: application/json
+
+###
